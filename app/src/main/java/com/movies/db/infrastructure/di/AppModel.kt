@@ -1,5 +1,6 @@
 package com.movies.db.infrastructure.di
 
+import com.movies.db.domain.datasources.MoviesDataSource
 import com.movies.db.domain.repository.MoviesDbRepository
 import com.movies.db.infrastructure.config.util.Constants.THE_MOVIEDB_URL
 import com.movies.db.infrastructure.data.remote.MoviesDbApi
@@ -21,7 +22,7 @@ abstract class AppModel {
     @Singleton
     @Provides
     fun provideMoviesDbRepository(
-        moviesDataSource: MoviesDataSourceImpl
+        moviesDataSource: MoviesDataSource
     ): MoviesDbRepository {
         return MoviesDbRepositoryImpl(
             moviesDataSource

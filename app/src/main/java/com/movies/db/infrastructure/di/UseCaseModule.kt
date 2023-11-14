@@ -1,4 +1,4 @@
-package com.movies.db.aplicacion
+package com.movies.db.infrastructure.di
 
 import com.movies.db.aplicacion.usecases.GetNowPlayingUseCase
 import com.movies.db.domain.repository.MoviesDbRepository
@@ -15,10 +15,10 @@ abstract class UseCaseModule {
     @Provides
     @Singleton
     fun provideGetNowPlayingUseCase(
-        repository: MoviesDbRepository,
+        moviesDbRepository: MoviesDbRepository,
     ): GetNowPlayingUseCase {
         return GetNowPlayingUseCase(
-            repository
+            moviesDbRepository
         )
     }
 }
