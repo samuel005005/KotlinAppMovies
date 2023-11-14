@@ -1,4 +1,4 @@
-package com.movies.db.infrastructure.di
+package com.movies.db.aplicacion
 
 import com.movies.db.aplicacion.usecases.GetNowPlayingUseCase
 import com.movies.db.domain.repository.MoviesDbRepository
