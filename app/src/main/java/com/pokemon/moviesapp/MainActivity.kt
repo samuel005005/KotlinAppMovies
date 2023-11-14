@@ -26,13 +26,6 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val itemsList = (0..5).toList()
-            val itemModifier = Modifier
-                .border(1.dp, Color.Blue)
-                .width(80.dp)
-                .wrapContentSize()
-            val itemsIndexedList = listOf("A", "B", "C")
-
             MoviesAppTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(

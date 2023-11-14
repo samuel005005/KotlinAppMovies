@@ -1,5 +1,8 @@
 package com.pokemon.moviesapp.di
 
+import com.pokemon.moviesapp.infrastructure.config.util.Constants.THE_MOVIEDB_URL
+import com.pokemon.moviesapp.infrastructure.data.remote.MoviesDbApi
+import com.pokemon.moviesapp.infrastructure.datasources.MoviesDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,18 +16,18 @@ import javax.inject.Singleton
 object   AppModel {
     @Singleton
     @Provides
-    fun providePokemonRepository(
-        api: PokeApi
-    ) = PokemonRepository(api)
+    fun provideMovieDbDataSource(
+        api: MoviesDbApi
+    ) = MoviesDataSource(api)
 
     @Singleton
     @Provides
-    fun providePokeApi(): PokeApi {
+    fun provideMovieDbApi(): MoviesDbApi {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(BASE_URL)
+            .baseUrl(THE_MOVIEDB_URL)
             .build()
-            .create(PokeApi::class.java);
+            .create(MoviesDbApi::class.java);
     }
 
 }
