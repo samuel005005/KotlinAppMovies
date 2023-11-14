@@ -1,4 +1,4 @@
-package com.pokemon.moviesapp.infrastructure.repositories
+package com.moviesapp.infrastructure.repositories
 
 import com.moviesapp.domain.core.Resource
 import com.moviesapp.domain.datasources.MoviesDataSource
