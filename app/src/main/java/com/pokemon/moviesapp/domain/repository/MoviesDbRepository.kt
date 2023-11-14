@@ -1,7 +1,8 @@
 package com.pokemon.moviesapp.domain.repository
 
+import com.pokemon.moviesapp.core.Resource
 import com.pokemon.moviesapp.domain.entities.Movie
 
 interface MoviesDbRepository {
-    suspend fun getNowPlaying(page: Int = 1): List<Movie>
+    suspend fun getNowPlaying(page: Int = 1): Resource<List<Movie>>
 }
