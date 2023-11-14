@@ -14,7 +14,7 @@ import javax.inject.Singleton
 abstract class UseCaseModule {
     @Provides
     @Singleton
-    fun provideFDRCardDetailsUseCase(
+    fun provideGetNowPlayingUseCase(
         repository: MoviesDbRepository,
     ): GetNowPlayingUseCase {
         return GetNowPlayingUseCase(
