@@ -5,7 +5,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface MoviesDbApi {
-    @GET("pokemon")
+    @GET("now_playing")
     suspend fun getNowPlaying(
         @Query("page") limit: Int,
     ): List<Movie>

@@ -1,4 +1,4 @@
-package com.pokemon.moviesapp.infrastructure.data.remote.responses
+package com.movies.db.infrastructure.data.remote.responses
 
 data class MovieMovieDB(
     val adult: Boolean,

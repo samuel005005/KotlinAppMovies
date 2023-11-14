@@ -1,7 +1,5 @@
 package com.movies.db.infrastructure.data.remote.responses
 
-import com.pokemon.moviesapp.infrastructure.data.remote.responses.MovieMovieDB
-
 data class MovieDbResponse(
     val dates: Dates,
     val page: Int,

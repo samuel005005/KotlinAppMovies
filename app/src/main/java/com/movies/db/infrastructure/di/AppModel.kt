@@ -2,7 +2,8 @@ package com.movies.db.infrastructure.di
 
 import com.movies.db.infrastructure.config.util.Constants.THE_MOVIEDB_URL
 import com.movies.db.infrastructure.data.remote.MoviesDbApi
-import com.pokemon.moviesapp.infrastructure.datasources.MoviesDataSource
+import com.movies.db.infrastructure.datasources.MoviesDataSourceImpl
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,13 +14,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object   AppModel {
-    @Singleton
-    @Provides
-    fun provideMovieDbDataSource(
-        api: MoviesDbApi
-    ) = MoviesDataSource(api)
-
+abstract class AppModel {
     @Singleton
     @Provides
     fun provideMovieDbApi(): MoviesDbApi {
