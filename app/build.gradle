@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace 'com.pokemon.moviesapp'
+    namespace 'com.moviesapp'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.pokemon.moviesapp"
+        applicationId "com.moviesapp"
         minSdk 30
         targetSdk 34
         versionCode 1
