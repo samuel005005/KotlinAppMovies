@@ -1,4 +1,4 @@
-package com.pokemon.moviesapp.infrastructure.data.remote
+package com.movies.db.infrastructure.data.remote
 
 import com.movies.db.domain.entities.Movie
 import retrofit2.http.GET

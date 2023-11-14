@@ -1,7 +1,7 @@
 package com.movies.db.infrastructure.di
 
 import com.movies.db.infrastructure.config.util.Constants.THE_MOVIEDB_URL
-import com.pokemon.moviesapp.infrastructure.data.remote.MoviesDbApi
+import com.movies.db.infrastructure.data.remote.MoviesDbApi
 import com.pokemon.moviesapp.infrastructure.datasources.MoviesDataSource
 import dagger.Module
 import dagger.Provides
