@@ -1,8 +1,10 @@
 package com.movies.db.infrastructure.di
 
+import com.movies.db.domain.repository.MoviesDbRepository
 import com.movies.db.infrastructure.config.util.Constants.THE_MOVIEDB_URL
 import com.movies.db.infrastructure.data.remote.MoviesDbApi
 import com.movies.db.infrastructure.datasources.MoviesDataSourceImpl
+import com.movies.db.infrastructure.repositories.MoviesDbRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -15,6 +17,16 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class AppModel {
+
+    @Singleton
+    @Provides
+    fun provideMoviesDbRepository(
+        moviesDataSource: MoviesDataSourceImpl
+    ): MoviesDbRepository {
+        return MoviesDbRepositoryImpl(
+            moviesDataSource
+        )
+    }
     @Singleton
     @Provides
     fun provideMovieDbApi(): MoviesDbApi {
