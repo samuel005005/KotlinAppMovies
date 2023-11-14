@@ -4,6 +4,6 @@ import com.pokemon.moviesapp.domain.entities.Movie
 
 data class MoviesState(
     val isLoading: Boolean = false,
-    val movie: List<Movie>? = null,
+    val movies: List<Movie>? = null,
     val error: String = ""
 )

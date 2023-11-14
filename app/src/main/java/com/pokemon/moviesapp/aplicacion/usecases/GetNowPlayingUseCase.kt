@@ -1,4 +1,4 @@
-package com.pokemon.moviesapp.domain.usecases
+package com.pokemon.moviesapp.aplicacion.usecases
 
 import com.pokemon.moviesapp.domain.entities.Movie
 import com.pokemon.moviesapp.domain.repository.MoviesDbRepository
