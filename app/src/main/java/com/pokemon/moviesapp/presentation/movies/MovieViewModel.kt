@@ -8,7 +8,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.launch
 import androidx.compose.runtime.State
-import com.pokemon.moviesapp.core.Resource
+import com.pokemon.moviesapp.domain.core.Resource
 
 @HiltViewModel
 class MovieViewModel @Inject constructor(private val getNowPlayingUseCase: GetNowPlayingUseCase) :

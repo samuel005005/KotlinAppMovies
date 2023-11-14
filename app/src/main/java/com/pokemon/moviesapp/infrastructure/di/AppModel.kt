@@ -1,4 +1,4 @@
-package com.pokemon.moviesapp.di
+package com.pokemon.moviesapp.infrastructure.di
 
 import com.pokemon.moviesapp.infrastructure.config.util.Constants.THE_MOVIEDB_URL
 import com.pokemon.moviesapp.infrastructure.data.remote.MoviesDbApi

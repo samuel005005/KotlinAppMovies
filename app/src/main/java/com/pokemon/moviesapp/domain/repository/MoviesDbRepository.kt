@@ -1,6 +1,6 @@
 package com.pokemon.moviesapp.domain.repository
 
-import com.pokemon.moviesapp.core.Resource
+import com.pokemon.moviesapp.domain.core.Resource
 import com.pokemon.moviesapp.domain.entities.Movie
 
 interface MoviesDbRepository {

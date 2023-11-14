@@ -2,7 +2,7 @@ package com.pokemon.moviesapp.aplicacion.usecases
 
 import com.pokemon.moviesapp.domain.entities.Movie
 import com.pokemon.moviesapp.domain.repository.MoviesDbRepository
-import com.pokemon.moviesapp.core.Resource
+import com.pokemon.moviesapp.domain.core.Resource
 import javax.inject.Inject
 
 class GetNowPlayingUseCase @Inject constructor(private val moviesDbRepository: MoviesDbRepository) {
