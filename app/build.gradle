@@ -7,12 +7,12 @@ plugins {
 
 android {
     namespace 'com.movies.db'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.movies.db"
         minSdk 30
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -111,6 +111,15 @@ dependencies {
 
     // Dependency for okhttp mock web server in test cycle
     testImplementation "com.squareup.okhttp3:mockwebserver:4.7.2"
+
+    // Carrousel Card Slider
+    implementation 'com.google.accompanist:accompanist-pager:0.20.0'
+
+    // Animar card
+    implementation 'androidx.compose.ui:ui-util:1.5.4'
+
+    // Para ver imagenes de una url
+    implementation 'io.coil-kt:coil-compose:2.2.2'
 
 }
 // Allow references to generated code

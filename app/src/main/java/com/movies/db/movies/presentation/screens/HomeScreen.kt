@@ -1,6 +1,7 @@
 package com.movies.db.movies.presentation.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -12,12 +13,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.movies.db.movies.presentation.MoviesViewModel
+import com.movies.db.movies.presentation.views.CarouselCard
 
 @Composable
 fun HomeScreen(
     viewModel: MoviesViewModel = hiltViewModel()
 ) {
+    Column() {
+        Text(text = "Welcome!!")
+        CarouselCard()
+    }
 
 }
 
