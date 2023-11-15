@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.movies.db.movies.presentation.MoviesViewModel
+import com.movies.db.movies.presentation.screens.HomeScreen
 import com.movies.db.shared.presentation.theme.MoviesAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -36,7 +37,7 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
                 ) {
-                    ButtonWidget()
+                    HomeScreen()
 //                    HorizontalListView()
                 }
             }
@@ -44,42 +45,5 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun ButtonWidget(viewModel: MoviesViewModel = hiltViewModel()) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.Yellow)
-    ) {
-        Button(
-            onClick = { viewModel.getNowPlaying(1) },
-            shape = RoundedCornerShape(8.dp),
-            modifier = Modifier
-                .padding(8.dp)
-                .width(120.dp)
-                .height(40.dp)
-        ) {
-            Text("Click Me")
-        }
-    }
-}
 
-@Composable
-fun HorizontalListView() {
-    val items = (1..50).toList()
 
-    LazyRow(
-        contentPadding = PaddingValues(horizontal = 10.dp, vertical = 20.dp),
-        modifier = Modifier.height(380.dp)
-    ) {
-        items(items) { item ->
-            Text(
-                text = "Item $item",
-                modifier = Modifier
-                    .padding(end = 10.dp)
-                    .background(color = Color.LightGray)
-                    .padding(16.dp)
-            )
-        }
-    }
-}
