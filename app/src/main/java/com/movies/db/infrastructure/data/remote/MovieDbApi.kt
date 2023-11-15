@@ -1,17 +1,17 @@
 package com.movies.db.infrastructure.data.remote
 
-import com.movies.db.domain.core.Resource
-import com.movies.db.domain.entities.Movie
-import com.movies.db.infrastructure.data.remote.responses.MoviesDBResponseItem
-import com.movies.db.infrastructure.data.remote.responses.MoviesRDResponse
+
+import com.movies.db.infrastructure.data.remote.responses.MoviesDbResponse
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.Headers
 import retrofit2.http.Query
-
+import retrofit2.Response
 interface MoviesDbApi {
+    @Headers("Accept: application/json")
     @GET("now_playing")
     suspend fun getNowPlaying(
         @Header("Authorization") authorization: String,
-        @Query("page") limit: Int,
-    ): Resource<MoviesRDResponse>
+        @Query("page") page: Int,
+    ): Response<MoviesDbResponse>
 }

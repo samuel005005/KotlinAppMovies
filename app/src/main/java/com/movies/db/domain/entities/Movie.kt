@@ -3,8 +3,8 @@ package com.movies.db.domain.entities
 data class Movie(
     val adult: Boolean,
     val backdropPath: String,
-    val genreIds: List<Int>,
-    val id: Int,
+    val genreIds: List<Long>,
+    val id: Long,
     val originalLanguage: String,
     val originalTitle: String,
     val overview: String,
@@ -14,5 +14,5 @@ data class Movie(
     val title: String,
     val video: Boolean,
     val voteAverage: Double,
-    val voteCount: Int
+    val voteCount: Long
 )
