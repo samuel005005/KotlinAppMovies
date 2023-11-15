@@ -19,13 +19,14 @@ class MoviesViewModel @Inject constructor(private val getNowPlayingUseCase: GetN
 
     fun getNowPlaying(page: Int) {
         viewModelScope.launch {
-            when (getNowPlayingUseCase(page)) {
+            when (val result = getNowPlayingUseCase(page)) {
                 is Resource.Success -> {
+                    Log.i("RESULT_MOVIES", "${result.data}")
                     _state.value = MoviesState()
                 }
 
                 else -> {
-                    Log.i("TEST","TEST")
+                    Log.i("TEST", "TEST")
                 }
             }
         }
