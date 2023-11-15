@@ -1,5 +1,6 @@
 package com.movies.db.presentation.movies
 
+import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import com.movies.db.aplicacion.usecases.GetNowPlayingUseCase
 import javax.inject.Inject
@@ -11,20 +12,21 @@ import androidx.compose.runtime.State
 import com.movies.db.domain.core.Resource
 
 @HiltViewModel
-class MovieViewModel @Inject constructor(private val getNowPlayingUseCase: GetNowPlayingUseCase) :
+class MoviesViewModel @Inject constructor(private val getNowPlayingUseCase: GetNowPlayingUseCase) :
     ViewModel() {
     private var _state = mutableStateOf(MoviesState())
-    val state: State<MoviesState> = _state
+    var state: State<MoviesState> = _state
 
-    private fun getNowPlaying(page: Int) {
+    fun getNowPlaying(page: Int) {
         viewModelScope.launch {
-            val resutl = getNowPlayingUseCase(page)
-            when (resutl) {
+            when (getNowPlayingUseCase(page)) {
                 is Resource.Success -> {
                     _state.value = MoviesState()
                 }
 
-                else -> {}
+                else -> {
+                    Log.i("TEST","TEST")
+                }
             }
         }
     }

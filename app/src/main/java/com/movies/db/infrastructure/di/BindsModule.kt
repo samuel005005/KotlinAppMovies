@@ -12,10 +12,17 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class DataSourceModule {
+abstract class BindsModule {
     @Binds
     @Singleton
-    abstract fun binMoviesDataSource(
+    abstract fun bindMoviesDataSource(
         moviesDataSource: MoviesDataSourceImpl
     ): MoviesDataSource
+
+
+    @Binds
+    @Singleton
+    abstract fun bindMoviesDbRepository(
+        moviesDbRepository: MoviesDbRepositoryImpl
+    ): MoviesDbRepository
 }
