@@ -13,7 +13,8 @@ class MoviesDataSourceImpl @Inject constructor(
     private val movieMapper: MovieMapper,
 ) : MoviesDataSource {
     override suspend fun getNowPlaying(page: Int): Resource<List<Movie>> {
-        return when (val response = api.getNowPlaying(authorization = "Bearer $THE_MOVIEDB_KEY", page)) {
+        return when (val response =
+            api.getNowPlaying(authorization = "Bearer $THE_MOVIEDB_KEY", page)) {
             is Resource.Success -> {
                 Resource.Success(movieMapper.mapMoviesDBResponseItemListToMovieList(response.data!!))
             }
