@@ -22,7 +22,6 @@ fun HomeScreen(
     viewModel: MoviesViewModel = hiltViewModel()
 ) {
     Column() {
-        Text(text = "Welcome!!")
         CarouselCard()
     }
 

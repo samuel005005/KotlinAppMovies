@@ -23,10 +23,10 @@ fun CarouselCard() {
 
     val pagerState = rememberPagerState(initialPage = 2)
     val sliderList = listOf(
-        "https://picsum.photos/id/237/500/800",
-        "https://picsum.photos/id/237/500/800",
-        "https://picsum.photos/id/237/500/800",
-        "https://picsum.photos/id/237/500/800"
+        "https://picsum.photos/id/237/800/500",
+        "https://picsum.photos/id/237/800/500",
+        "https://picsum.photos/id/237/800/500",
+        "https://picsum.photos/id/237/800/500"
     )
     Column(
         modifier = Modifier.fillMaxSize()
@@ -34,8 +34,8 @@ fun CarouselCard() {
         HorizontalPager(
             count = sliderList.size,
             state = pagerState,
-            contentPadding = PaddingValues(horizontal = 100.dp),
-            modifier = Modifier.height(350.dp)
+            contentPadding = PaddingValues(horizontal = 40.dp),
+            modifier = Modifier.height(250.dp)
         ) { page ->
             Card(
                 shape = RoundedCornerShape(10.dp)
