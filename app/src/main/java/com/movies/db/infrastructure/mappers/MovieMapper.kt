@@ -3,6 +3,7 @@ package com.movies.db.infrastructure.mappers
 import com.movies.db.domain.core.Mapper
 import com.movies.db.domain.entities.Movie
 import com.movies.db.infrastructure.data.remote.responses.MoviesDBResponseItem
+import com.movies.db.infrastructure.data.remote.responses.MoviesRDResponse
 import javax.inject.Inject
 
 class MovieMapper @Inject constructor() :
@@ -15,9 +16,9 @@ class MovieMapper @Inject constructor() :
         TODO("Not yet implemented")
     }
 
-    fun mapMoviesDBResponseItemListToMovieList(moviesDBResponseItem: ArrayList<MoviesDBResponseItem>): ArrayList<Movie> {
+    fun mapMoviesDBResponseItemListToMovieList(moviesDBResponse: MoviesRDResponse): ArrayList<Movie> {
         val movieList: ArrayList<Movie> = arrayListOf()
-        moviesDBResponseItem.forEach {
+        moviesDBResponse.results.forEach() {
             movieList.add(map(it))
         }
         return movieList
