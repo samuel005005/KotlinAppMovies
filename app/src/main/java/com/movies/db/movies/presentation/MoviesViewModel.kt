@@ -10,25 +10,49 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.launch
 import androidx.compose.runtime.State
 import com.movies.db.shared.domain.core.Resource
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 @HiltViewModel
 class MoviesViewModel @Inject constructor(private val getNowPlayingUseCase: GetNowPlayingUseCase) :
     ViewModel() {
-    private var _state = mutableStateOf(MoviesState())
-    var state: State<MoviesState> = _state
 
-    fun getNowPlaying(page: Int) {
+    private val _state = MutableStateFlow(MoviesState())
+    val state: StateFlow<MoviesState> = _state.asStateFlow()
+
+    init {
+        moviesSlideShow(1)
+    }
+
+
+    private fun moviesSlideShow(page: Int) {
+        _state.value = MoviesState(isLoading = true)
         viewModelScope.launch {
-            when (val result = getNowPlayingUseCase(page)) {
-                is Resource.Success -> {
-                    Log.i("RESULT_MOVIES", "${result.data}")
-                    _state.value = MoviesState()
-                }
+            try {
+                when (val result = getNowPlayingUseCase(page)) {
+                    is Resource.Success -> {
 
-                else -> {
-                    Log.i("TEST", "TEST")
+                        _state.value = MoviesState(
+                            isLoading = false,
+                            movies = result.data?.subList(0, 6)
+                        )
+                    }
+
+                    else -> {
+                        _state.value = MoviesState(
+                            isLoading = false,
+                            error = result.message!!
+                        )
+                    }
                 }
+            } catch (e: Exception) {
+                _state.value = MoviesState(
+                    isLoading = false,
+                    error = "${e.message}"
+                )
             }
+
         }
     }
 }

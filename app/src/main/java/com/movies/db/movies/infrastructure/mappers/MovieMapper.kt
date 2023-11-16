@@ -8,10 +8,12 @@ import javax.inject.Inject
 
 class MovieMapper @Inject constructor() :
     Mapper<MovieDbResponse, Movie>() {
+
+
     override fun map(value: MovieDbResponse): Movie {
         return Movie(
             adult = value.adult,
-            backdropPath = value.backdropPath,
+            backdropPath = "https://image.tmdb.org/t/p/w780/${value.backdropPath}",
             genreIds = value.genreIDS,
             id = value.id,
             originalLanguage = value.originalLanguage,

@@ -121,6 +121,7 @@ dependencies {
     // Para ver imagenes de una url
     implementation 'io.coil-kt:coil-compose:2.2.2'
 
+    implementation "androidx.lifecycle:lifecycle-runtime-compose:2.6.0-beta01"
 }
 // Allow references to generated code
 kapt {
