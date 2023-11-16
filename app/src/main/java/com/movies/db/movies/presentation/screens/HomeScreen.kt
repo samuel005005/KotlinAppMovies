@@ -12,9 +12,11 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.ShoppingCart
+import androidx.compose.material.icons.filled.ThumbUp
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -80,7 +82,7 @@ fun HomeScreen(
             },
             navigationIcon = {
                 IconButton(onClick = { /*TODO*/ }) {
-                    Icon(imageVector = Icons.Default.Menu, contentDescription = "Menu Icon")
+                    Icon(imageVector = Icons.Default.Home, contentDescription = "Menu Icon")
                 }
             },
             actions = {
