@@ -74,7 +74,7 @@ fun CarouselCard() {
                 state = pagerState,
                 contentPadding = PaddingValues(horizontal = 55.dp),
                 modifier = Modifier
-                    .height(300.dp)
+                    .height(250.dp)
                     .weight(1f)
             ) { page ->
                 Card(shape = RoundedCornerShape(10.dp), modifier = Modifier.graphicsLayer {
@@ -109,7 +109,7 @@ fun CarouselCard() {
 
         Row(
             modifier = Modifier
-                .height(30.dp)
+                .height(20.dp)
                 .fillMaxWidth(),
             horizontalArrangement = Arrangement.Center
         ) {
@@ -120,7 +120,7 @@ fun CarouselCard() {
                     modifier = Modifier
                         .padding(2.dp)
                         .clip(CircleShape)
-                        .size(20.dp)
+                        .size(10.dp)
                         .background(color)
                         .clickable {
                             scope.launch {
