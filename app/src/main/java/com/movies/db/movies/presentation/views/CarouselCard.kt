@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.magnifier
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
@@ -67,6 +68,7 @@ fun CarouselCard(movies: List<Movie>?) {
         }
     }
     Column(
+        Modifier.padding(vertical = 65.dp)
     ) {
         Row(
             modifier = Modifier
@@ -85,7 +87,6 @@ fun CarouselCard(movies: List<Movie>?) {
                 state = pagerState,
                 contentPadding = PaddingValues(
                     horizontal = 45.dp,
-                    vertical = 10.dp
                 ),
                 modifier = Modifier
                     .height(210.dp)
