@@ -86,7 +86,7 @@ fun CarouselCard(movies: List<Movie>?) {
                 count = movies!!.size,
                 state = pagerState,
                 contentPadding = PaddingValues(
-                    horizontal = 45.dp,
+                    horizontal = 45.dp, vertical = 10.dp
                 ),
                 modifier = Modifier
                     .height(210.dp)
