@@ -112,8 +112,8 @@ fun CarouselCard(movies: List<Movie>?) {
                                 fraction = 1f - pageOffset.coerceIn(0f, 1f)
                             )
                         }) {
-                    AsyncImage(
 
+                    AsyncImage(
                         contentScale = ContentScale.Crop,
                         model = ImageRequest.Builder(LocalContext.current)
                             .data(movies[page].backdropPath)
@@ -134,10 +134,9 @@ fun CarouselCard(movies: List<Movie>?) {
 //                Icon(Icons.Default.KeyboardArrowRight, null)
 //            }
         }
-
         Row(
             modifier = Modifier
-                .height(20.dp)
+                .height(30.dp)
                 .fillMaxWidth(),
             horizontalArrangement = Arrangement.Center
         ) {
