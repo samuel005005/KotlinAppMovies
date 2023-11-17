@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'com.google.dagger.hilt.android'
+    id 'io.realm.kotlin'
 }
 
 android {
@@ -122,6 +123,11 @@ dependencies {
     implementation 'io.coil-kt:coil-compose:2.2.2'
 
     implementation "androidx.lifecycle:lifecycle-runtime-compose:2.6.0-beta01"
+
+    // Ream DB
+    implementation 'io.realm.kotlin:library-base:1.11.0'
+    implementation 'io.realm.kotlin:library-sync:1.11.0'// If using Device Sync
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.0' // If using coroutines with the SDK
 }
 // Allow references to generated code
 kapt {
