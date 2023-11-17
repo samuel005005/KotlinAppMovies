@@ -1,8 +1,10 @@
 package com.movies.db.movies.infrastructure.di
 
-import com.movies.db.movies.domain.datasources.MoviesDataSource
+import com.movies.db.movies.domain.datasources.MoviesCacheDataSource
+import com.movies.db.movies.domain.datasources.MoviesRemoteDataSource
 import com.movies.db.movies.domain.repository.MoviesDbRepository
-import com.movies.db.movies.infrastructure.datasources.MoviesDataSourceImpl
+import com.movies.db.movies.infrastructure.datasources.MoviesCacheDataSourceImpl
+import com.movies.db.movies.infrastructure.datasources.MoviesRemoteDataSourceImpl
 import com.movies.db.movies.infrastructure.repositories.MoviesDbRepositoryImpl
 import dagger.Binds
 import dagger.Module
@@ -15,10 +17,15 @@ import javax.inject.Singleton
 abstract class BindsModule {
     @Binds
     @Singleton
-    abstract fun bindMoviesDataSource(
-        moviesDataSource: MoviesDataSourceImpl
-    ): MoviesDataSource
+    abstract fun bindMoviesRemoteDataSource(
+        moviesRemoteDataSource: MoviesRemoteDataSourceImpl
+    ): MoviesRemoteDataSource
 
+    @Binds
+    @Singleton
+    abstract fun bindMoviesCacheDataSource(
+        moviesDataSource: MoviesCacheDataSourceImpl
+    ): MoviesCacheDataSource
 
     @Binds
     @Singleton
