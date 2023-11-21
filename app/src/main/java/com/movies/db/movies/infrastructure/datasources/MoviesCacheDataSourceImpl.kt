@@ -8,6 +8,7 @@ import com.movies.db.shared.domain.core.Resource
 import com.movies.db.shared.infrastructure.config.util.Constants
 import io.realm.Realm
 import javax.inject.Inject
+import kotlin.coroutines.suspendCoroutine
 
 class MoviesCacheDataSourceImpl @Inject constructor(
     private val realm: Realm,
@@ -20,5 +21,19 @@ class MoviesCacheDataSourceImpl @Inject constructor(
             return Resource.Success(movieMapper.mapMoviesDBEntitiesItemListToMovieList(data));
         }
         return Resource.Error(Constants.ERROR_GET_DATA)
+    }
+
+    override suspend fun saveMovies(movies: List<Movie>): Boolean {
+        return suspendCoroutine { result ->
+            realm.executeTransactionAsync(
+                { bgRealm ->
+                    movies.forEach {
+                        bgRealm.insertOrUpdate(movieMapper.map(it))
+                    }
+                },
+                { result.resumeWith(Result.success(true)) },
+                { result.resumeWith(Result.success(false)) }
+            )
+        }
     }
 }
