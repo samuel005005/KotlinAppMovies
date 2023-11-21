@@ -28,7 +28,7 @@ class MoviesViewModel @Inject constructor(private val getNowPlayingUseCase: GetN
         moviesSlideShow()
     }
 
-    private fun getNowPlaying(page: Int) {
+    fun getNowPlaying(page: Int) {
         _nowPlayingMovies.value = MoviesState(isLoading = true)
         viewModelScope.launch {
             try {

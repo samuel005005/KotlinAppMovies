@@ -15,12 +15,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.movies.db.movies.domain.entities.Movie
+import com.movies.db.movies.presentation.MoviesState
+
 
 @Composable
 fun MovieHorizontalListView(
     movies: List<Movie>,
     title: String,
-    subTitle: String
+    subTitle: String,
+    fetchMoreMovies: (page: Int) -> Unit,
 ) {
     val listState = rememberLazyListState()
     Row(
@@ -35,10 +38,11 @@ fun MovieHorizontalListView(
             Text(text = subTitle)
         }
     }
-    Text(if (listState.firstVisibleItemIndex < 3) "< 100" else ">= 100")
+    Text("${listState.firstVisibleItemIndex}")
     LazyRow(state = listState) {
         items(movies.size) {
             MovieView(movie = movies[it])
         }
     }
+
 }
