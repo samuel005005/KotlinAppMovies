@@ -29,7 +29,7 @@ object RealmModule {
     @Singleton
     fun provideRealmConfiguration(encryptionKey: ByteArray): RealmConfiguration {
         return RealmConfiguration.Builder()
-            .name("corelibrary.bpd.realm")
+            .name("movie.db.realm")
             .schemaVersion(realmVersion)
             .deleteRealmIfMigrationNeeded()
             .encryptionKey(encryptionKey)
@@ -45,7 +45,7 @@ object RealmModule {
     ): Realm {
         Realm.init(context)
         val realmConfiguration = RealmConfiguration.Builder()
-            .name("corelibrary.bpd.realm")
+            .name("movie.db.realm")
             .schemaVersion(realmVersion)
             .deleteRealmIfMigrationNeeded()
             .encryptionKey(encryptionKey)

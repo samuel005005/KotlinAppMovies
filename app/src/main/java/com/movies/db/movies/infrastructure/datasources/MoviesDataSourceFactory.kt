@@ -10,7 +10,6 @@ class MoviesDataSourceFactory @Inject constructor(
     private val moviesRemoteData: MoviesRemoteDataSource,
     private val moviesCacheData: MoviesCacheDataSource,
 ) {
-
     suspend fun getNowPlaying(): Resource<List<Movie>> {
         var movies = moviesCacheData.getNowPlaying();
         if (movies.data?.isEmpty() == true) {
