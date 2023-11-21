@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 class MoviesDbRepositoryImpl @Inject constructor(private val moviesDataSourceFactory: MoviesDataSourceFactory) :
     MoviesDbRepository {
-    override suspend fun getNowPlaying(page: Int): Resource<List<Movie>> {
-        return moviesDataSourceFactory.getNowPlaying()
+    override suspend fun getNowPlaying(page: Int, refresh: Boolean): Resource<List<Movie>> {
+        return moviesDataSourceFactory.getNowPlaying(page,refresh)
     }
 }

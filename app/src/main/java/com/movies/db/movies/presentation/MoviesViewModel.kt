@@ -28,11 +28,11 @@ class MoviesViewModel @Inject constructor(private val getNowPlayingUseCase: GetN
         moviesSlideShow()
     }
 
-    fun getNowPlaying(page: Int) {
+    fun getNowPlaying(page: Int, refresh: Boolean = false) {
         _nowPlayingMovies.value = MoviesState(isLoading = true)
         viewModelScope.launch {
             try {
-                when (val result = getNowPlayingUseCase(page)) {
+                when (val result = getNowPlayingUseCase(page, refresh)) {
                     is Resource.Success -> {
                         _nowPlayingMovies.value = MoviesState(
                             isLoading = false,

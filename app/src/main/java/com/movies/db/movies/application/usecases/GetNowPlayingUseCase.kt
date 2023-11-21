@@ -6,7 +6,7 @@ import com.movies.db.shared.domain.core.Resource
 import javax.inject.Inject
 
 class GetNowPlayingUseCase @Inject constructor(private val moviesDbRepository: MoviesDbRepository) {
-    suspend operator fun invoke(page: Int): Resource<List<Movie>> {
-        return moviesDbRepository.getNowPlaying(page)
+    suspend operator fun invoke(page: Int = 1, refresh: Boolean = false): Resource<List<Movie>> {
+        return moviesDbRepository.getNowPlaying(page, refresh)
     }
 }

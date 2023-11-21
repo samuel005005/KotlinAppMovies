@@ -107,7 +107,7 @@ fun HomeScreen(
                     title = "In Theaters",
                     subTitle = "On Monday 20",
                     fetchMoreMovies = { page ->
-                        viewModel.getNowPlaying(page = page)
+                        viewModel.getNowPlaying(page = page, refresh = true)
                     }
                 )
             }
