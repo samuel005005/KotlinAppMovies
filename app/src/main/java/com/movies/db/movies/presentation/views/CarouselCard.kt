@@ -63,7 +63,7 @@ fun CarouselCard(movies: List<Movie>?) {
         }
     }
     Column(
-        Modifier.padding(vertical = 65.dp)
+        Modifier.padding(top = 65.dp)
     ) {
         Row(
             modifier = Modifier
@@ -149,9 +149,7 @@ fun CarouselCard(movies: List<Movie>?) {
                                 pagerState.animateScrollToPage(it)
                             }
                         }
-                ) {
-
-                }
+                )
             }
         }
     }
