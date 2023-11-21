@@ -18,7 +18,7 @@ class MovieToResponseMapper @Inject constructor() : Mapper<MovieDbResponse, Movi
             originalTitle = value.originalTitle,
             overview = value.overview,
             popularity = value.popularity,
-            posterPath = value.posterPath,
+            posterPath = "https://image.tmdb.org/t/p/w500/${value.posterPath}",
             releaseDate = value.releaseDate,
             title = value.title,
             video = value.video,
@@ -28,7 +28,22 @@ class MovieToResponseMapper @Inject constructor() : Mapper<MovieDbResponse, Movi
     }
 
     override fun reverseMap(value: Movie): MovieDbResponse {
-        TODO("Not yet implemented")
+        return MovieDbResponse(
+            adult = value.adult,
+            backdropPath = "https://image.tmdb.org/t/p/w780/${value.backdropPath}",
+            genreIDS = value.genreIds,
+            id = value.id,
+            originalLanguage = value.originalLanguage,
+            originalTitle = value.originalTitle,
+            overview = value.overview,
+            popularity = value.popularity,
+            posterPath = "https://image.tmdb.org/t/p/w500/${value.posterPath}",
+            releaseDate = value.releaseDate,
+            title = value.title,
+            video = value.video,
+            voteAverage = value.voteAverage,
+            voteCount = value.voteCount,
+        )
     }
 
     fun mapMoviesDBResponseItemListToMovieList(moviesDbResponse: MoviesDbResponse): ArrayList<Movie> {

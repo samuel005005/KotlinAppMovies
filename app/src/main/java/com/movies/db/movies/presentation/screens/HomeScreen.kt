@@ -44,6 +44,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.movies.db.R
 import com.movies.db.movies.presentation.MoviesViewModel
 import com.movies.db.movies.presentation.views.CarouselCard
+import com.movies.db.movies.presentation.views.MovieHorizontalListView
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -51,7 +52,9 @@ import com.movies.db.movies.presentation.views.CarouselCard
 fun HomeScreen(
     viewModel: MoviesViewModel = hiltViewModel()
 ) {
-    val state = viewModel.state.collectAsStateWithLifecycle()
+    val carrouselMovies = viewModel.carrouselMovies.collectAsStateWithLifecycle()
+    val nowPlayingMovies = viewModel.nowPlayingMovies.collectAsStateWithLifecycle()
+
 //    LaunchedEffect(key1 = true) {
 //        viewModel.eventFlow.collectLatest { event ->
 //            when (event) {
@@ -108,26 +111,18 @@ fun HomeScreen(
         Column(
             modifier = Modifier.fillMaxWidth(),
         ) {
-            if (state.value.isLoading) {
+            if (nowPlayingMovies.value.isLoading) {
                 CircularProgressIndicator()
             } else {
-                CarouselCard(state.value.movies)
-            }
-            Row(
-                modifier = Modifier
-                    .padding(horizontal = 10.dp)
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(text = "In Theaters", fontSize = 20.sp)
-                FilledTonalButton(onClick = {}) {
-                    Text(text = "On Monday 20")
-                }
+                CarouselCard(carrouselMovies.value.movies)
+                MovieHorizontalListView(
+                    movies = nowPlayingMovies.value.movies!!,
+                    title = "In Theaters",
+                    subTitle = "On Monday 20"
+                )
             }
         }
     }
-
 }
 
 

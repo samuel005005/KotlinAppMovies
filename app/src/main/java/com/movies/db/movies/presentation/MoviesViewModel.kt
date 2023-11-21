@@ -18,41 +18,49 @@ import kotlinx.coroutines.flow.asStateFlow
 class MoviesViewModel @Inject constructor(private val getNowPlayingUseCase: GetNowPlayingUseCase) :
     ViewModel() {
 
-    private val _state = MutableStateFlow(MoviesState())
-    val state: StateFlow<MoviesState> = _state.asStateFlow()
+    private val _carrouselMovies = MutableStateFlow(MoviesState())
+    val carrouselMovies: StateFlow<MoviesState> = _carrouselMovies.asStateFlow()
+    private val _nowPlayingMovies = MutableStateFlow(MoviesState())
+    val nowPlayingMovies: StateFlow<MoviesState> = _nowPlayingMovies.asStateFlow()
 
     init {
-        moviesSlideShow(1)
+        getNowPlaying(1)
+        moviesSlideShow()
     }
 
-
-    private fun moviesSlideShow(page: Int) {
-        _state.value = MoviesState(isLoading = true)
+    private fun getNowPlaying(page: Int) {
+        _nowPlayingMovies.value = MoviesState(isLoading = true)
         viewModelScope.launch {
             try {
                 when (val result = getNowPlayingUseCase(page)) {
                     is Resource.Success -> {
-
-                        _state.value = MoviesState(
+                        _nowPlayingMovies.value = MoviesState(
                             isLoading = false,
-                            movies = result.data?.subList(0, 6)
+                            movies = result.data
                         )
                     }
 
                     else -> {
-                        _state.value = MoviesState(
+                        _nowPlayingMovies.value = MoviesState(
                             isLoading = false,
                             error = result.message!!
                         )
                     }
                 }
             } catch (e: Exception) {
-                _state.value = MoviesState(
+                _nowPlayingMovies.value = MoviesState(
                     isLoading = false,
                     error = "${e.message}"
                 )
             }
+        }
+    }
 
+    private fun moviesSlideShow() {
+        if (!_nowPlayingMovies.value.isLoading) {
+            _carrouselMovies.value = MoviesState(
+                isLoading = false, movies = _nowPlayingMovies.value.movies?.subList(0, 6)
+            )
         }
     }
 }
