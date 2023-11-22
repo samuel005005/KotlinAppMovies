@@ -14,26 +14,20 @@ class MoviesCacheDataSourceImpl @Inject constructor(
     private val realm: Realm,
     private val movieMapper: MovieToEntityMapper,
 ) : MoviesCacheDataSource {
-    override suspend fun getNowPlaying(): Resource<List<Movie>> {
-        val data = realm.where(MovieEntity::class.java)
-            .findAll()
-        if (data != null) {
-            return Resource.Success(movieMapper.mapMoviesDBEntitiesItemListToMovieList(data));
-        }
-        return Resource.Error(Constants.ERROR_GET_DATA)
+    override suspend fun getNowPlaying(): List<Movie> {
+        val data = realm.where(MovieEntity::class.java).findAll()
+        return data.map { movieMapper.reverseMap(it) }
     }
 
     override suspend fun saveMovies(movies: List<Movie>): Boolean {
         return suspendCoroutine { result ->
-            realm.executeTransactionAsync(
-                { bgRealm ->
-                    movies.forEach {
-                        bgRealm.insertOrUpdate(movieMapper.map(it))
-                    }
-                },
+            realm.executeTransactionAsync({ bgRealm ->
+                movies.forEach {
+                    bgRealm.insertOrUpdate(movieMapper.map(it))
+                }
+            },
                 { result.resumeWith(Result.success(true)) },
-                { result.resumeWith(Result.success(false)) }
-            )
+                { result.resumeWith(Result.success(false)) })
         }
     }
 }

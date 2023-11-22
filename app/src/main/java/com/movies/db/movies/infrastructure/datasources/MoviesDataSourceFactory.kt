@@ -10,12 +10,11 @@ class MoviesDataSourceFactory @Inject constructor(
     private val moviesRemoteData: MoviesRemoteDataSource,
     private val moviesCacheData: MoviesCacheDataSource,
 ) {
-    suspend fun getNowPlaying(page: Int, refresh: Boolean): Resource<List<Movie>> {
+    suspend fun getNowPlaying(page: Int, refresh: Boolean): List<Movie> {
         var movies = moviesCacheData.getNowPlaying();
-        if (movies.data?.isEmpty() == true || refresh) {
-            movies = moviesRemoteData.getNowPlaying(page)
-            if (movies.data != null && movies.data!!.isNotEmpty()) {
-                val movies = movies.data!!;
+        if (movies.isEmpty() || refresh) {
+            movies = moviesRemoteData.getNowPlaying(page)!!
+            if (movies.isEmpty()) {
                 moviesCacheData.saveMovies(movies = movies);
             }
         }

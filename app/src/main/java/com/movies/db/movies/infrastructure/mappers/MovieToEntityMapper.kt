@@ -9,8 +9,7 @@ import io.realm.RealmList
 import io.realm.RealmResults
 import javax.inject.Inject
 
-class MovieToEntityMapper @Inject constructor() :
-    Mapper<Movie, MovieEntity>() {
+class MovieToEntityMapper @Inject constructor() : Mapper<Movie, MovieEntity>() {
     override fun map(value: Movie): MovieEntity {
         val realmList = RealmList<Long>()
         realmList.addAll(value.genreIds)
@@ -49,15 +48,5 @@ class MovieToEntityMapper @Inject constructor() :
             voteAverage = value.voteAverage,
             voteCount = value.voteCount,
         )
-    }
-
-    fun mapMoviesDBEntitiesItemListToMovieList(
-        moviesEntity: RealmResults<MovieEntity>
-    ): ArrayList<Movie> {
-        val movieList: ArrayList<Movie> = arrayListOf()
-        moviesEntity.forEach {
-            movieList.add(reverseMap(it))
-        }
-        return movieList
     }
 }

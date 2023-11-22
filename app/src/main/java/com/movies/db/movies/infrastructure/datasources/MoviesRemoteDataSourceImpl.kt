@@ -12,18 +12,15 @@ class MoviesRemoteDataSourceImpl @Inject constructor(
     private val api: MoviesDbApi,
     private val movieMapper: MovieToResponseMapper,
 ) : MoviesRemoteDataSource {
-    override suspend fun getNowPlaying(page: Int): Resource<List<Movie>> {
-        return try {
-            val response = api.getNowPlaying(authorization = "Bearer $THE_MOVIEDB_KEY", page)
-            if (response.isSuccessful && response.body() != null) {
-                Resource.Success(movieMapper.mapMoviesDBResponseItemListToMovieList(response.body()!!))
-            } else {
-                Resource.Error(response.message())
+    override suspend fun getNowPlaying(page: Int): List<Movie>? {
+        val response = api.getNowPlaying(authorization = "Bearer $THE_MOVIEDB_KEY", page)
+        return if (response.isSuccessful && response.body() != null) {
+            val movies = response.body()
+            movies?.results?.map {
+                movieMapper.map(it)
             }
-        } catch (e: Exception) {
-            Resource.Error(
-                e.message ?: ""
-            )
+        } else {
+            null
         }
     }
 }
