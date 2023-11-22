@@ -46,7 +46,7 @@ fun MovieHorizontalListView(
     LazyRow(state = listState) {
         items(state.movies.size) { i ->
             val movie = state.movies[i]
-            if (i >= state.movies.size && !state.endReached && !state.isLoading) {
+            if (i >= state.movies.size -1 && !state.isLoading) {
                 fetchMoreMovies()
             }
             MovieView(movie = movie)
