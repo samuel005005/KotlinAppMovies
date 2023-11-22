@@ -44,7 +44,7 @@ import kotlin.math.absoluteValue
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun CarouselCard(movies: List<Movie>?) {
+fun CarouselCard(movies: List<Movie>) {
 
     val pagerState = rememberPagerState(initialPage = 2)
     val scope = rememberCoroutineScope()
@@ -78,7 +78,7 @@ fun CarouselCard(movies: List<Movie>?) {
 //                Icon(Icons.Default.KeyboardArrowLeft, null)
 //            }
             HorizontalPager(
-                count = movies!!.size,
+                count = movies.size,
                 state = pagerState,
                 contentPadding = PaddingValues(
                     horizontal = 45.dp, vertical = 10.dp

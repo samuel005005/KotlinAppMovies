@@ -25,7 +25,6 @@ class MoviesViewModel @Inject constructor(private val getNowPlayingUseCase: GetN
 
     init {
         getNowPlaying(1)
-        moviesSlideShow()
     }
 
     fun getNowPlaying(page: Int, refresh: Boolean = false) {
@@ -36,8 +35,9 @@ class MoviesViewModel @Inject constructor(private val getNowPlayingUseCase: GetN
                     is Resource.Success -> {
                         _nowPlayingMovies.value = MoviesState(
                             isLoading = false,
-                            movies = result.data
+                            movies = result.data ?: emptyList()
                         )
+                        moviesSlideShow()
                     }
 
                     else -> {
@@ -59,7 +59,7 @@ class MoviesViewModel @Inject constructor(private val getNowPlayingUseCase: GetN
     private fun moviesSlideShow() {
         if (!_nowPlayingMovies.value.isLoading) {
             _carrouselMovies.value = MoviesState(
-                isLoading = false, movies = _nowPlayingMovies.value.movies?.subList(0, 6)
+                isLoading = false, movies = _nowPlayingMovies.value.movies.subList(0, 6)
             )
         }
     }
