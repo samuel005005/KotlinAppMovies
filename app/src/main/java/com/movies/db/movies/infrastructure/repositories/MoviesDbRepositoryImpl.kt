@@ -16,11 +16,18 @@ class MoviesDbRepositoryImpl @Inject constructor(
     private val movieToResponseMapper: MovieToResponseMapper
 ) : MoviesDbRepository {
     override suspend fun getNowPlaying(page: Int, refresh: Boolean): Resource<List<Movie>> {
-        val movies = moviesDataSourceFactory.getCacheData().getNowPlaying(page);
+        val cache = moviesDataSourceFactory.getCacheData()
+        val movies = cache.getNowPlaying(page);
         return if (movies.isEmpty() || refresh) {
             val result = moviesDataSourceFactory.getRemoteData().getNowPlaying(page)
             if (result.isSuccessful && result.body() != null) {
-                Resource.Success(result.body()!!.results.map { movieToResponseMapper.map(it) })
+                val movies = result.body()!!
+                cache.saveMovies(movies.results.map {
+                    movieToResponseMapper.map(it)
+                }.map {
+                    movieToEntityMapper.map(it)
+                })
+                Resource.Success(movies.results.map { movieToResponseMapper.map(it) })
             } else {
                 Resource.Error(Constants.ERROR_GET_DATA)
             }
