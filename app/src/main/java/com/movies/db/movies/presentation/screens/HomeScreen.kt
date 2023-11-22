@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -88,10 +87,9 @@ fun HomeScreen(
         Column(
             modifier = Modifier.fillMaxWidth(),
         ) {
-            if (nowPlayingMovies.value.isLoading) {
-                CircularProgressIndicator()
-            } else {
-                CarouselCard(carrouselMovies.value.movies)
+            CarouselCard(carrouselMovies.value.movies)
+
+//            if (nowPlayingMovies.value.movies.isNotEmpty()) {
                 MovieHorizontalListView(
                     movies = nowPlayingMovies.value.movies,
                     title = "In Theaters",
@@ -100,7 +98,7 @@ fun HomeScreen(
                         viewModel.getNowPlaying(page = page, refresh = true)
                     }
                 )
-            }
+//            }
         }
     }
 }

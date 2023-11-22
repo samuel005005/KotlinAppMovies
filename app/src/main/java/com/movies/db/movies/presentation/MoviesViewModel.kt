@@ -35,9 +35,11 @@ class MoviesViewModel @Inject constructor(private val getNowPlayingUseCase: GetN
                     is Resource.Success -> {
                         _nowPlayingMovies.value = MoviesState(
                             isLoading = false,
-                            movies = result.data ?: emptyList()
+                            movies = _nowPlayingMovies.value.movies.union(result.data!!).toList()
                         )
-                        moviesSlideShow()
+                        if (_carrouselMovies.value.movies.isEmpty()) {
+                            moviesSlideShow()
+                        }
                     }
 
                     else -> {
