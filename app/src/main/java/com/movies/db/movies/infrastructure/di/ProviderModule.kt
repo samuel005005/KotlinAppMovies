@@ -1,7 +1,5 @@
 package com.movies.db.movies.infrastructure.di
 
-import com.movies.db.movies.domain.datasources.MoviesCacheDataSource
-import com.movies.db.movies.domain.datasources.MoviesRemoteDataSource
 import com.movies.db.movies.infrastructure.datasources.MoviesDataSourceFactory
 import dagger.Module
 import dagger.Provides

@@ -1,9 +1,7 @@
 package com.movies.db.movies.infrastructure.di
 
-import com.movies.db.movies.domain.datasources.MoviesCacheDataSource
-import com.movies.db.movies.domain.datasources.MoviesRemoteDataSource
 import com.movies.db.movies.domain.repository.MoviesDbRepository
-import com.movies.db.movies.infrastructure.datasources.MoviesCacheDataSourceImpl
+import com.movies.db.movies.infrastructure.datasources.MoviesCacheDataSourcseImpl
 import com.movies.db.movies.infrastructure.datasources.MoviesRemoteDataSourceImpl
 import com.movies.db.movies.infrastructure.repositories.MoviesDbRepositoryImpl
 import dagger.Binds
@@ -24,7 +22,7 @@ abstract class BindsModule {
     @Binds
     @Singleton
     abstract fun bindMoviesCacheDataSource(
-        moviesDataSource: MoviesCacheDataSourceImpl
+        moviesDataSource: MoviesCacheDataSourcseImpl
     ): MoviesCacheDataSource
 
     @Binds
