@@ -87,7 +87,7 @@ fun HomeScreen(
         Column(
             modifier = Modifier.fillMaxWidth(),
         ) {
-            CarouselCard(carrouselMovies.value.movies)
+            CarouselCard(nowPlayingMovies.value.movies.subList(0,6))
             MovieHorizontalListView(
                 state = nowPlayingMovies.value,
                 title = "In Theaters",

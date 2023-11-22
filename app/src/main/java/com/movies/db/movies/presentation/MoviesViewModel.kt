@@ -57,12 +57,5 @@ class MoviesViewModel @Inject constructor(private val getNowPlayingUseCase: GetN
             paginator.loadNextItems()
         }
     }
-
-    private fun moviesSlideShow() {
-        if (!_nowPlayingMovies.value.isLoading) {
-            _carrouselMovies.value = MoviesState(
-                isLoading = false, movies = _nowPlayingMovies.value.movies.subList(0, 6)
-            )
-        }
-    }
+    
 }
