@@ -87,15 +87,17 @@ fun HomeScreen(
         Column(
             modifier = Modifier.fillMaxWidth(),
         ) {
-            CarouselCard(nowPlayingMovies.value.movies.subList(0,6))
-            MovieHorizontalListView(
-                state = nowPlayingMovies.value,
-                title = "In Theaters",
-                subTitle = "On Monday 20",
-                fetchMoreMovies = {
-                    viewModel.getNowPlaying()
-                }
-            )
+            if (nowPlayingMovies.value.movies.isNotEmpty()) {
+                CarouselCard(nowPlayingMovies.value.movies.subList(0, 6))
+                MovieHorizontalListView(
+                    state = nowPlayingMovies.value,
+                    title = "In Theaters",
+                    subTitle = "On Monday 20",
+                    fetchMoreMovies = {
+                        viewModel.getNowPlaying()
+                    }
+                )
+            }
         }
     }
 }

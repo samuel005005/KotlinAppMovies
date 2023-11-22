@@ -43,7 +43,7 @@ class MoviesViewModel @Inject constructor(private val getNowPlayingUseCase: GetN
             _nowPlayingMovies.value = _nowPlayingMovies.value.copy(
                 movies = _nowPlayingMovies.value.movies + movies,
                 page = newPage,
-                endReached = movies.isEmpty(),
+                endReached = movies.isNotEmpty(),
             )
         }
     )
@@ -57,5 +57,5 @@ class MoviesViewModel @Inject constructor(private val getNowPlayingUseCase: GetN
             paginator.loadNextItems()
         }
     }
-    
+
 }
