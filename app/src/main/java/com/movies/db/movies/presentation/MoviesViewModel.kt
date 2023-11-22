@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.launch
 import androidx.compose.runtime.State
 import com.movies.db.shared.domain.core.Resource
+import com.movies.db.shared.presentation.util.DefaultPaginator
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -23,38 +24,37 @@ class MoviesViewModel @Inject constructor(private val getNowPlayingUseCase: GetN
     private val _nowPlayingMovies = MutableStateFlow(MoviesState())
     val nowPlayingMovies: StateFlow<MoviesState> = _nowPlayingMovies.asStateFlow()
 
+
+    val paginator = DefaultPaginator(
+        initialKey = _nowPlayingMovies.value.page,
+        onLoadUpdated = {
+            _nowPlayingMovies.value = _nowPlayingMovies.value.copy(isLoading = it)
+        },
+        onRequest = { nextPage ->
+            getNowPlayingUseCase(nextPage, true)
+        },
+        getNextKey = {
+            _nowPlayingMovies.value.page + 1
+        },
+        onError = {
+            _nowPlayingMovies.value = _nowPlayingMovies.value.copy(error = it?.localizedMessage)
+        },
+        onSuccess = { movies, newPage ->
+            _nowPlayingMovies.value = _nowPlayingMovies.value.copy(
+                movies = _nowPlayingMovies.value.movies + movies,
+                page = newPage,
+                endReached = movies.isEmpty(),
+            )
+        }
+    )
+
     init {
-        getNowPlaying(1)
+        getNowPlaying()
     }
 
-    fun getNowPlaying(page: Int, refresh: Boolean = false) {
-        _nowPlayingMovies.value = MoviesState(isLoading = true)
+    fun getNowPlaying() {
         viewModelScope.launch {
-            try {
-                when (val result = getNowPlayingUseCase(page, refresh)) {
-                    is Resource.Success -> {
-                        _nowPlayingMovies.value = MoviesState(
-                            isLoading = false,
-                            movies = _nowPlayingMovies.value.movies.union(result.data!!).toList()
-                        )
-                        if (_carrouselMovies.value.movies.isEmpty()) {
-                            moviesSlideShow()
-                        }
-                    }
-
-                    else -> {
-                        _nowPlayingMovies.value = MoviesState(
-                            isLoading = false,
-                            error = result.message!!
-                        )
-                    }
-                }
-            } catch (e: Exception) {
-                _nowPlayingMovies.value = MoviesState(
-                    isLoading = false,
-                    error = "${e.message}"
-                )
-            }
+            paginator.loadNextItems()
         }
     }
 

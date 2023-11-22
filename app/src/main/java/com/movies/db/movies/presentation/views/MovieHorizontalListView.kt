@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,13 +24,12 @@ import com.movies.db.movies.presentation.MoviesState
 
 @Composable
 fun MovieHorizontalListView(
-    movies: List<Movie>,
+    state: MoviesState,
     title: String,
     subTitle: String,
-    fetchMoreMovies: (page: Int) -> Unit,
+    fetchMoreMovies: () -> Unit,
 ) {
     val listState = rememberLazyListState()
-    val currentPage = remember { mutableIntStateOf(1) }
     Row(
         modifier = Modifier
             .padding(horizontal = 10.dp)
@@ -43,13 +43,25 @@ fun MovieHorizontalListView(
         }
     }
 
-    if (listState.firstVisibleItemIndex + 4 >= movies.size) {
-        currentPage.value += 1;
-        fetchMoreMovies(currentPage.value)
-    }
     LazyRow(state = listState) {
-        items(movies.size) {
-            MovieView(movie = movies[it])
+        items(state.movies.size) { i ->
+            val movie = state.movies[i]
+            if (i >= state.movies.size && !state.endReached && !state.isLoading) {
+                fetchMoreMovies()
+            }
+            MovieView(movie = movie)
+        }
+        item {
+            if (state.isLoading) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp),
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    CircularProgressIndicator()
+                }
+            }
         }
     }
 
