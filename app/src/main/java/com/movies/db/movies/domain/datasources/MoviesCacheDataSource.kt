@@ -4,5 +4,6 @@ import com.movies.db.movies.infrastructure.data.cache.MovieEntity
 import io.realm.RealmResults
 
 interface MoviesCacheDataSource : MoviesDataSource<RealmResults<MovieEntity>> {
-    suspend fun saveMovies(movies: List<MovieEntity>): Boolean;
+    suspend fun saveMovies(movies: List<MovieEntity>): Boolean
+    suspend fun validateExistMovie(movie: MovieEntity): Boolean
 }

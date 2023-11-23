@@ -1,4 +1,4 @@
-package com.movies.db.movies.presentation.views
+package com.movies.db.movies.presentation.widgets
 
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween

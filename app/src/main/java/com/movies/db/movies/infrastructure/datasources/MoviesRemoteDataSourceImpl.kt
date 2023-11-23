@@ -13,4 +13,16 @@ class MoviesRemoteDataSourceImpl @Inject constructor(
     override suspend fun getNowPlaying(page: Int): Response<MoviesDbResponse> {
         return api.getNowPlaying(authorization = "Bearer $THE_MOVIEDB_KEY", page)
     }
+
+    override suspend fun getPopular(page: Int): Response<MoviesDbResponse> {
+        return api.getPopular(authorization = "Bearer $THE_MOVIEDB_KEY", page)
+    }
+
+    override suspend fun getTopRated(page: Int): Response<MoviesDbResponse> {
+        return api.getTopRated(authorization = "Bearer $THE_MOVIEDB_KEY", page)
+    }
+
+    override suspend fun getUpcoming(page: Int): Response<MoviesDbResponse> {
+        return api.getUpcoming(authorization = "Bearer $THE_MOVIEDB_KEY", page)
+    }
 }

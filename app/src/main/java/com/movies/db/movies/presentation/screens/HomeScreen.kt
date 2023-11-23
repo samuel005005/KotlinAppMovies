@@ -19,8 +19,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.movies.db.R
 import com.movies.db.movies.presentation.MoviesViewModel
-import com.movies.db.movies.presentation.views.CarouselCard
-import com.movies.db.movies.presentation.views.MovieHorizontalListView
+import com.movies.db.movies.presentation.widgets.CarouselCard
+import com.movies.db.movies.presentation.widgets.MovieHorizontalListWidget
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -89,7 +89,7 @@ fun HomeScreen(
         ) {
             if (nowPlayingMovies.value.movies.isNotEmpty()) {
                 CarouselCard(nowPlayingMovies.value.movies.subList(0, 6))
-                MovieHorizontalListView(
+                MovieHorizontalListWidget(
                     state = nowPlayingMovies.value,
                     title = "In Theaters",
                     subTitle = "On Monday 20",

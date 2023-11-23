@@ -7,6 +7,7 @@ import retrofit2.http.Header
 import retrofit2.http.Headers
 import retrofit2.http.Query
 import retrofit2.Response
+
 interface MoviesDbApi {
     @Headers("Accept: application/json")
     @GET("now_playing")
@@ -14,4 +15,26 @@ interface MoviesDbApi {
         @Header("Authorization") authorization: String,
         @Query("page") page: Int,
     ): Response<MoviesDbResponse>
+
+    @Headers("Accept: application/json")
+    @GET("popular")
+    suspend fun getPopular(
+        @Header("Authorization") authorization: String,
+        @Query("page") page: Int,
+    ): Response<MoviesDbResponse>
+
+    @Headers("Accept: application/json")
+    @GET("top_rated")
+    suspend fun getTopRated(
+        @Header("Authorization") authorization: String,
+        @Query("page") page: Int,
+    ): Response<MoviesDbResponse>
+
+    @Headers("Accept: application/json")
+    @GET("upcoming")
+    suspend fun getUpcoming(
+        @Header("Authorization") authorization: String,
+        @Query("page") page: Int,
+    ): Response<MoviesDbResponse>
+
 }
