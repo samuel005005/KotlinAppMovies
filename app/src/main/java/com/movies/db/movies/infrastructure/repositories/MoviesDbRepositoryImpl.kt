@@ -18,9 +18,9 @@ class MoviesDbRepositoryImpl @Inject constructor(
     override suspend fun getNowPlaying(page: Int, refresh: Boolean): Resource<List<Movie>> {
         val cache = moviesDataSourceFactory.getCacheData()
         val movies = cache.getNowPlaying(page);
-        if (movies.isEmpty() || refresh) {
+        return if (movies.isEmpty() || refresh) {
             val result = moviesDataSourceFactory.getRemoteData().getNowPlaying(page)
-            return if (result.isSuccessful && result.body() != null) {
+             if (result.isSuccessful && result.body() != null) {
                 val movies = result.body()!!
                 cache.saveMovies(movies.results.map {
                     movieToResponseMapper.map(it)
@@ -32,16 +32,16 @@ class MoviesDbRepositoryImpl @Inject constructor(
                 Resource.Error(Constants.ERROR_GET_DATA)
             }
         } else {
-            return Resource.Success(movies.map { movieToEntityMapper.reverseMap(it) })
+             Resource.Success(movies.map { movieToEntityMapper.reverseMap(it) })
         }
     }
 
     override suspend fun getPopular(page: Int, refresh: Boolean): Resource<List<Movie>> {
         val cache = moviesDataSourceFactory.getCacheData()
         val movies = cache.getPopular(page);
-        if (movies.isEmpty() || refresh) {
+        return if (movies.isEmpty() || refresh) {
             val result = moviesDataSourceFactory.getRemoteData().getPopular(page)
-            return if (result.isSuccessful && result.body() != null) {
+            if (result.isSuccessful && result.body() != null) {
                 val movies = result.body()!!
                 cache.saveMovies(movies.results.map {
                     movieToResponseMapper.map(it)
@@ -53,7 +53,7 @@ class MoviesDbRepositoryImpl @Inject constructor(
                 Resource.Error(Constants.ERROR_GET_DATA)
             }
         } else {
-            return Resource.Success(movies.map { movieToEntityMapper.reverseMap(it) })
+            Resource.Success(movies.map { movieToEntityMapper.reverseMap(it) })
         }
     }
 
