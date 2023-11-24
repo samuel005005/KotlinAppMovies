@@ -3,8 +3,11 @@ package com.movies.db.movies.presentation.widgets
 
 import MovieWidget
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -27,39 +30,44 @@ fun MovieHorizontalListWidget(
     fetchMoreMovies: () -> Unit,
 ) {
     val listState = rememberLazyListState()
-    Row(
-        modifier = Modifier
-            .padding(horizontal = 10.dp)
-            .fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Text(text = title, fontSize = 20.sp)
-        FilledTonalButton(onClick = {}) {
-            Text(text = subTitle)
-        }
-    }
-
-    LazyRow(state = listState) {
-        items(state.movies.size) { i ->
-            val movie = state.movies[i]
-            if (i >= state.movies.size -1 && !state.isLoading) {
-                fetchMoreMovies()
+    Box(modifier = Modifier.height(350.dp)) {
+        Column() {
+            Row(
+                modifier = Modifier
+                    .padding(horizontal = 10.dp)
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(text = title, fontSize = 20.sp)
+                FilledTonalButton(onClick = {}) {
+                    Text(text = subTitle)
+                }
             }
-            MovieWidget(movie = movie)
-        }
-        item {
-            if (state.isLoading) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(8.dp),
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    CircularProgressIndicator()
+            LazyRow(state = listState) {
+                items(state.movies.size) { i ->
+                    val movie = state.movies[i]
+                    if (i >= state.movies.size - 1 && !state.isLoading) {
+                        fetchMoreMovies()
+                    }
+                    MovieWidget(movie = movie)
+                }
+                item {
+                    if (state.isLoading) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(8.dp),
+                            horizontalArrangement = Arrangement.Center
+                        ) {
+                            CircularProgressIndicator()
+                        }
+                    }
                 }
             }
         }
+
     }
+
 
 }

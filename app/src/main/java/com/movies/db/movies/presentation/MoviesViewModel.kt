@@ -9,6 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.launch
 import androidx.compose.runtime.State
+import com.movies.db.movies.application.usecases.GetPopularUseCase
 import com.movies.db.movies.domain.entities.Movie
 import com.movies.db.shared.domain.core.Resource
 import com.movies.db.shared.presentation.util.DefaultPaginator
@@ -17,17 +18,20 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 @HiltViewModel
-class MoviesViewModel @Inject constructor(private val getNowPlayingUseCase: GetNowPlayingUseCase) :
+class MoviesViewModel @Inject constructor(
+    private val getNowPlayingUseCase: GetNowPlayingUseCase,
+    private val getPopularUseCase: GetPopularUseCase
+) :
     ViewModel() {
 
-    private val _carrouselMovies = MutableStateFlow(MoviesState())
-    val carrouselMovies: StateFlow<MoviesState> = _carrouselMovies.asStateFlow()
     private val _nowPlayingMovies = MutableStateFlow(MoviesState())
     val nowPlayingMovies: StateFlow<MoviesState> = _nowPlayingMovies.asStateFlow()
-
+    private val _popularMovies = MutableStateFlow(MoviesState())
+    val popularMovies: StateFlow<MoviesState> = _popularMovies.asStateFlow()
 
     init {
         getNowPlaying()
+        getPopular()
     }
 
     fun getNowPlaying() {
@@ -35,6 +39,15 @@ class MoviesViewModel @Inject constructor(private val getNowPlayingUseCase: GetN
             paginator(states = _nowPlayingMovies, useCase =
             { nextPage, refresh ->
                 getNowPlayingUseCase(nextPage, refresh)
+            }).loadNextItems()
+        }
+    }
+
+    fun getPopular() {
+        viewModelScope.launch {
+            paginator(states = _popularMovies, useCase =
+            { nextPage, refresh ->
+                getPopularUseCase(nextPage, refresh)
             }).loadNextItems()
         }
     }

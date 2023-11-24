@@ -3,6 +3,8 @@ package com.movies.db.movies.presentation.screens
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -28,8 +30,9 @@ import com.movies.db.movies.presentation.widgets.MovieHorizontalListWidget
 fun HomeScreen(
     viewModel: MoviesViewModel = hiltViewModel()
 ) {
-    val carrouselMovies = viewModel.carrouselMovies.collectAsStateWithLifecycle()
+
     val nowPlayingMovies = viewModel.nowPlayingMovies.collectAsStateWithLifecycle()
+    val popularMovies = viewModel.popularMovies.collectAsStateWithLifecycle()
 
 //    LaunchedEffect(key1 = true) {
 //        viewModel.eventFlow.collectLatest { event ->
@@ -85,7 +88,8 @@ fun HomeScreen(
         )
     }) {
         Column(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth()
+                .verticalScroll(rememberScrollState()),
         ) {
             if (nowPlayingMovies.value.movies.isNotEmpty()) {
                 CarouselCard(nowPlayingMovies.value.movies.subList(0, 6))
@@ -95,6 +99,14 @@ fun HomeScreen(
                     subTitle = "On Monday 20",
                     fetchMoreMovies = {
                         viewModel.getNowPlaying()
+                    }
+                )
+                MovieHorizontalListWidget(
+                    state = popularMovies.value,
+                    title = "Popular",
+                    subTitle = "In this month",
+                    fetchMoreMovies = {
+                        viewModel.getPopular()
                     }
                 )
             }
