@@ -10,6 +10,8 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.launch
 import androidx.compose.runtime.State
 import com.movies.db.movies.application.usecases.GetPopularUseCase
+import com.movies.db.movies.application.usecases.GetTopRated
+import com.movies.db.movies.application.usecases.GetUpcoming
 import com.movies.db.movies.domain.entities.Movie
 import com.movies.db.shared.domain.core.Resource
 import com.movies.db.shared.presentation.util.DefaultPaginator
@@ -20,7 +22,9 @@ import kotlinx.coroutines.flow.asStateFlow
 @HiltViewModel
 class MoviesViewModel @Inject constructor(
     private val getNowPlayingUseCase: GetNowPlayingUseCase,
-    private val getPopularUseCase: GetPopularUseCase
+    private val getPopularUseCase: GetPopularUseCase,
+    private val getTopRated: GetTopRated,
+    private val getUpcoming: GetUpcoming
 ) :
     ViewModel() {
 
@@ -28,10 +32,15 @@ class MoviesViewModel @Inject constructor(
     val nowPlayingMovies: StateFlow<MoviesState> = _nowPlayingMovies.asStateFlow()
     private val _popularMovies = MutableStateFlow(MoviesState())
     val popularMovies: StateFlow<MoviesState> = _popularMovies.asStateFlow()
-
+    private val _topRatedMovies = MutableStateFlow(MoviesState())
+    val topRatedMovies: StateFlow<MoviesState> = _topRatedMovies.asStateFlow()
+    private val _upcomingMovies = MutableStateFlow(MoviesState())
+    val upComingMovies: StateFlow<MoviesState> = _upcomingMovies.asStateFlow()
     init {
         getNowPlaying()
         getPopular()
+        getUpcomingMovies()
+        getTopRatedMovies()
     }
 
     fun getNowPlaying() {
@@ -48,6 +57,22 @@ class MoviesViewModel @Inject constructor(
             paginator(states = _popularMovies, useCase =
             { nextPage, refresh ->
                 getPopularUseCase(nextPage, refresh)
+            }).loadNextItems()
+        }
+    }
+    fun getTopRatedMovies() {
+        viewModelScope.launch {
+            paginator(states = _topRatedMovies, useCase =
+            { nextPage, refresh ->
+                getTopRated(nextPage, refresh)
+            }).loadNextItems()
+        }
+    }
+    fun getUpcomingMovies() {
+        viewModelScope.launch {
+            paginator(states = _upcomingMovies, useCase =
+            { nextPage, refresh ->
+                getUpcoming(nextPage, refresh)
             }).loadNextItems()
         }
     }

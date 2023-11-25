@@ -32,8 +32,9 @@ fun HomeScreen(
 ) {
 
     val nowPlayingMovies = viewModel.nowPlayingMovies.collectAsStateWithLifecycle()
+    val upComingMovies = viewModel.upComingMovies.collectAsStateWithLifecycle()
     val popularMovies = viewModel.popularMovies.collectAsStateWithLifecycle()
-
+    val topRatedMovies = viewModel.topRatedMovies.collectAsStateWithLifecycle()
 //    LaunchedEffect(key1 = true) {
 //        viewModel.eventFlow.collectLatest { event ->
 //            when (event) {
@@ -102,11 +103,27 @@ fun HomeScreen(
                     }
                 )
                 MovieHorizontalListWidget(
+                    state = upComingMovies.value,
+                    title = "Comming Soon",
+                    subTitle = "In this month",
+                    fetchMoreMovies = {
+                        viewModel.getUpcomingMovies()
+                    }
+                )
+                MovieHorizontalListWidget(
                     state = popularMovies.value,
                     title = "Popular",
                     subTitle = "In this month",
                     fetchMoreMovies = {
                         viewModel.getPopular()
+                    }
+                )
+                MovieHorizontalListWidget(
+                    state = topRatedMovies.value,
+                    title = "Top rated",
+                    subTitle = "Of all times",
+                    fetchMoreMovies = {
+                        viewModel.getTopRatedMovies()
                     }
                 )
             }

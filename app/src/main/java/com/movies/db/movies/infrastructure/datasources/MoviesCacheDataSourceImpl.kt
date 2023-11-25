@@ -20,12 +20,11 @@ class MoviesCacheDataSourceImpl @Inject constructor(
     }
 
     override suspend fun getTopRated(page: Int): RealmResults<MovieEntity> {
-        return realm.where(MovieEntity::class.java).greaterThan("vote_average", 7.0).findAll()
+        return realm.where(MovieEntity::class.java).greaterThan("voteAverage", 7.0).findAll()
     }
 
     override suspend fun getUpcoming(page: Int): RealmResults<MovieEntity> {
-        return realm.where(MovieEntity::class.java)
-            .greaterThan("release_date", Calendar.getInstance().time).findAll()
+        return realm.where(MovieEntity::class.java).findAll().sort("id")
     }
 
     override suspend fun saveMovies(movies: List<MovieEntity>): Boolean {
