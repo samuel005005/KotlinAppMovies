@@ -18,7 +18,7 @@ import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import com.movies.db.movies.presentation.MoviesViewModel
 import com.movies.db.movies.presentation.screens.HomeScreen
-import com.movies.db.shared.presentation.util.Routes
+import com.movies.db.app.core.util.Routes
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

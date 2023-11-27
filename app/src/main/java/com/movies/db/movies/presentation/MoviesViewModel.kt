@@ -1,20 +1,17 @@
 package com.movies.db.movies.presentation
 
-import android.util.Log
-import androidx.compose.runtime.mutableStateOf
 import com.movies.db.movies.application.usecases.GetNowPlayingUseCase
 import javax.inject.Inject
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.launch
-import androidx.compose.runtime.State
 import com.movies.db.movies.application.usecases.GetPopularUseCase
 import com.movies.db.movies.application.usecases.GetTopRated
 import com.movies.db.movies.application.usecases.GetUpcoming
 import com.movies.db.movies.domain.entities.Movie
-import com.movies.db.shared.domain.core.Resource
-import com.movies.db.shared.presentation.util.DefaultPaginator
+import com.movies.db.app.core.Resource
+import com.movies.db.app.core.util.DefaultPaginator
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

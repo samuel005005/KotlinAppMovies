@@ -1,12 +1,9 @@
 package com.movies.db.movies.infrastructure.mappers
 
-import com.movies.db.shared.domain.core.Mapper
+import com.movies.db.app.core.Mapper
 import com.movies.db.movies.domain.entities.Movie
 import com.movies.db.movies.infrastructure.data.cache.MovieEntity
-import com.movies.db.movies.infrastructure.data.remote.responses.MovieDbResponse
-import com.movies.db.movies.infrastructure.data.remote.responses.MoviesDbResponse
 import io.realm.RealmList
-import io.realm.RealmResults
 import javax.inject.Inject
 
 class MovieToEntityMapper @Inject constructor() : Mapper<Movie, MovieEntity>() {

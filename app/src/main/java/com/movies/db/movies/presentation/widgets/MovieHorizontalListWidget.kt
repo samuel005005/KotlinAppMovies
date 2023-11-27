@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.movies.db.movies.presentation.MoviesState
-import com.movies.db.shared.presentation.util.Routes
+import com.movies.db.app.core.util.Routes
 
 
 @Composable

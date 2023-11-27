@@ -3,7 +3,7 @@ package com.movies.db.movies.infrastructure.datasources
 import com.movies.db.movies.domain.datasources.MovieRemoteDataSource
 import com.movies.db.movies.infrastructure.data.remote.MoviesDbApi
 import com.movies.db.movies.infrastructure.data.remote.responses.MoviesDbResponse
-import com.movies.db.shared.infrastructure.config.util.Constants.THE_MOVIEDB_KEY
+import com.movies.db.app.config.util.Constants.THE_MOVIEDB_KEY
 import retrofit2.Response
 import javax.inject.Inject
 

@@ -3,7 +3,7 @@ package com.movies.db.movies.infrastructure.mappers
 import com.movies.db.movies.domain.entities.Movie
 import com.movies.db.movies.infrastructure.data.remote.responses.MovieDbResponse
 import com.movies.db.movies.infrastructure.data.remote.responses.MoviesDbResponse
-import com.movies.db.shared.domain.core.Mapper
+import com.movies.db.app.core.Mapper
 import javax.inject.Inject
 
 class MovieToResponseMapper @Inject constructor() : Mapper<MovieDbResponse, Movie>() {

@@ -1,14 +1,14 @@
 package com.movies.db.movies.infrastructure.repositories
 
 import com.movies.db.movies.domain.datasources.MoviesCacheDataSource
-import com.movies.db.shared.domain.core.Resource
+import com.movies.db.app.core.Resource
 import com.movies.db.movies.domain.entities.Movie
 import com.movies.db.movies.domain.repository.MoviesDbRepository
 import com.movies.db.movies.infrastructure.data.remote.responses.MoviesDbResponse
 import com.movies.db.movies.infrastructure.datasources.MoviesDataSourceFactory
 import com.movies.db.movies.infrastructure.mappers.MovieToEntityMapper
 import com.movies.db.movies.infrastructure.mappers.MovieToResponseMapper
-import com.movies.db.shared.infrastructure.config.util.Constants
+import com.movies.db.app.config.util.Constants
 import retrofit2.Response
 import javax.inject.Inject
 
