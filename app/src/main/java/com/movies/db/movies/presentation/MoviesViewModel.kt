@@ -9,7 +9,6 @@ import com.movies.db.movies.application.usecases.GetPopularUseCase
 import com.movies.db.movies.application.usecases.GetTopRated
 import com.movies.db.movies.application.usecases.GetUpcoming
 import com.movies.db.movies.domain.entities.Movie
-import com.movies.db.movies.presentation.parcelables.mappers.MovieToViewMovieMapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -25,7 +24,6 @@ class MoviesViewModel @Inject constructor(
     private val getUpcoming: GetUpcoming
 ) :
     ViewModel() {
-    private val movieToViewMovieMapper = MovieToViewMovieMapper()
     private val _nowPlayingMovies = MutableStateFlow(MoviesState())
     val nowPlayingMovies: StateFlow<MoviesState> = _nowPlayingMovies.asStateFlow()
     private val _popularMovies = MutableStateFlow(MoviesState())
@@ -98,7 +96,7 @@ class MoviesViewModel @Inject constructor(
             },
             onSuccess = { movies, newPage ->
                 states.value = states.value.copy(
-                    movies = states.value.movies + movies.map { movieToViewMovieMapper.map(it) },
+                    movies = states.value.movies + movies,
                     page = newPage,
                     endReached = movies.isNotEmpty(),
                 )

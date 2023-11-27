@@ -56,7 +56,7 @@ fun MovieHorizontalListWidget(
                     }
                     MovieWidget(movie = movie, modifier = Modifier.clickable {
                         navHostController.navigate(
-                            Routes.Movie.createRoute(movieId = movie.id)
+                            Routes.MovieDetails.createRoute(movie = movie)
                         )
                     })
                 }

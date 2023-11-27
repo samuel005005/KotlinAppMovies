@@ -8,7 +8,7 @@ import com.movies.db.movies.presentation.MoviesViewModel
 @Composable
 fun MoviesScreen(
     navHostController: NavHostController,
-    movieId: Long
+    movie: Movie
 ) {
-    Text(text = movieId.toString())
+    Text(text = movie.backdropPath.toString())
 }

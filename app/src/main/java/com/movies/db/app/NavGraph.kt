@@ -39,12 +39,11 @@ fun NavHostApplication() {
                 val viewModel = it.shareViewModel<MoviesViewModel>(navController = navController)
                 HomeScreen(navHostController = navController)
             }
-            composable(Routes.Movie.screenRoute, arguments = listOf(navArgument("movieId") {
+            composable(Routes.MovieDetails.screenRoute, arguments = listOf(navArgument("movieId") {
                 type = NavType.LongType
             })) { backStackEntry ->
                 MoviesScreen(
-                    navHostController = navController,
-                    movieId = backStackEntry.arguments?.getLong("movieId") ?: 0
+                    navHostController = navController
                 )
             }
         }
