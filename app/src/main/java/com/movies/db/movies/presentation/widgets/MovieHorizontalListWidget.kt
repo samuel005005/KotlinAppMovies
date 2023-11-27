@@ -2,6 +2,7 @@ package com.movies.db.movies.presentation.widgets
 
 
 import MovieWidget
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,11 +20,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.movies.db.movies.presentation.MoviesState
+import com.movies.db.shared.presentation.util.Routes
 
 
 @Composable
 fun MovieHorizontalListWidget(
+    navHostController: NavHostController,
     state: MoviesState,
     title: String,
     subTitle: String,
@@ -50,7 +54,11 @@ fun MovieHorizontalListWidget(
                     if (i >= state.movies.size - 1 && !state.isLoading) {
                         fetchMoreMovies()
                     }
-                    MovieWidget(movie = movie)
+                    MovieWidget(movie = movie, modifier = Modifier.clickable {
+                        navHostController.navigate(
+                            Routes.Movie.createRoute(movieId = movie.id)
+                        )
+                    })
                 }
                 item {
                     if (state.isLoading) {

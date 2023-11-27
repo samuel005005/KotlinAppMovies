@@ -35,10 +35,10 @@ import com.movies.db.movies.domain.entities.Movie
 import com.movies.db.shared.domain.core.HumanFormats
 
 @Composable
-fun MovieWidget(movie: Movie) {
+fun MovieWidget(movie: Movie, modifier: Modifier) {
     val yellowShade800 = Color(0xFFFFC107)
 
-    Column {
+    Column(modifier = modifier) {
         Box(
             modifier = Modifier
                 .width(150.dp)

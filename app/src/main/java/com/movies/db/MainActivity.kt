@@ -1,30 +1,20 @@
 package com.movies.db
 
+import MoviesScreen
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import com.movies.db.movies.presentation.MoviesViewModel
+import androidx.navigation.NavBackStackEntry
+import androidx.navigation.NavController
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import androidx.navigation.navigation
 import com.movies.db.movies.presentation.screens.HomeScreen
-import com.movies.db.shared.presentation.theme.MoviesAppTheme
+import com.movies.db.shared.presentation.util.Routes
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -32,19 +22,37 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MoviesAppTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    HomeScreen()
-//                    HorizontalListView()
+            val navController = rememberNavController()
+            NavHost(navController = navController, startDestination = Routes.Home.screenRoute) {
+
+//                navigation(
+//                    startDestination = Routes.Home.screenRoute,
+//                    route = "auth"
+//                ){
+//
+//                }
+                composable(Routes.Home.screenRoute) {
+                    HomeScreen(navHostController = navController)
+                }
+                composable(
+                    Routes.Movie.screenRoute, arguments = listOf(
+                        navArgument("movieId") {
+                            type = NavType.LongType
+                        }
+                    )
+                ) { backStackEntry ->
+                    MoviesScreen(
+                        navHostController = navController,
+                        movieId = backStackEntry.arguments?.getLong("movieId") ?: 0
+                    )
                 }
             }
         }
     }
 }
 
+@Composable
+fun <T> NavBackStackEntry.shareViewModel(navController: NavController): T {
 
 
+}

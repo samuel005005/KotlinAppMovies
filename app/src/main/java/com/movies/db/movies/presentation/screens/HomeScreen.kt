@@ -19,6 +19,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavHostController
 import com.movies.db.R
 import com.movies.db.movies.presentation.MoviesViewModel
 import com.movies.db.movies.presentation.widgets.CarouselCard
@@ -28,8 +29,10 @@ import com.movies.db.movies.presentation.widgets.MovieHorizontalListWidget
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    viewModel: MoviesViewModel = hiltViewModel()
-) {
+    navHostController: NavHostController,
+    viewModel: MoviesViewModel = hiltViewModel(),
+
+    ) {
 
     val nowPlayingMovies = viewModel.nowPlayingMovies.collectAsStateWithLifecycle()
     val upComingMovies = viewModel.upComingMovies.collectAsStateWithLifecycle()
@@ -89,43 +92,40 @@ fun HomeScreen(
         )
     }) {
         Column(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .verticalScroll(rememberScrollState()),
         ) {
             if (nowPlayingMovies.value.movies.isNotEmpty()) {
                 CarouselCard(nowPlayingMovies.value.movies.subList(0, 6))
-                MovieHorizontalListWidget(
+                MovieHorizontalListWidget(navHostController = navHostController,
                     state = nowPlayingMovies.value,
                     title = "In Theaters",
                     subTitle = "On Monday 20",
                     fetchMoreMovies = {
                         viewModel.getNowPlaying()
-                    }
-                )
-                MovieHorizontalListWidget(
+                    })
+                MovieHorizontalListWidget(navHostController = navHostController,
                     state = upComingMovies.value,
                     title = "Comming Soon",
                     subTitle = "In this month",
                     fetchMoreMovies = {
                         viewModel.getUpcomingMovies()
-                    }
-                )
-                MovieHorizontalListWidget(
+                    })
+                MovieHorizontalListWidget(navHostController = navHostController,
                     state = popularMovies.value,
                     title = "Popular",
                     subTitle = "In this month",
                     fetchMoreMovies = {
                         viewModel.getPopular()
-                    }
-                )
-                MovieHorizontalListWidget(
+                    })
+                MovieHorizontalListWidget(navHostController = navHostController,
                     state = topRatedMovies.value,
                     title = "Top rated",
                     subTitle = "Of all times",
                     fetchMoreMovies = {
                         viewModel.getTopRatedMovies()
-                    }
-                )
+                    })
             }
         }
     }
