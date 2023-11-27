@@ -19,6 +19,7 @@ import androidx.navigation.navigation
 import com.movies.db.movies.presentation.MoviesViewModel
 import com.movies.db.movies.presentation.screens.HomeScreen
 import com.movies.db.app.core.util.Routes
+import com.movies.db.app.navigation.NavGraphApp
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,19 +28,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val navController = rememberNavController()
-            NavHost(navController = navController, startDestination = Routes.Home.screenRoute) {
-                composable(Routes.Home.screenRoute) {
-                    HomeScreen(navHostController = navController)
-                }
-                composable(Routes.Movie.screenRoute, arguments = listOf(navArgument("movieId") {
-                    type = NavType.LongType
-                })) { backStackEntry ->
-                    MoviesScreen(
-                        navHostController = navController,
-                        movieId = backStackEntry.arguments?.getLong("movieId") ?: 0
-                    )
-                }
-            }
+            NavGraphApp(navController = navController)
         }
     }
 }
