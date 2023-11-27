@@ -5,6 +5,7 @@ plugins {
     id 'com.google.dagger.hilt.android'
     id 'realm-android'
     id 'kotlin-parcelize'
+    id 'org.jetbrains.kotlin.plugin.serialization'
 }
 
 android {
@@ -124,9 +125,6 @@ dependencies {
     implementation 'io.coil-kt:coil-compose:2.2.2'
 
     implementation "androidx.lifecycle:lifecycle-runtime-compose:2.6.0-beta01"
-
-    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1'
-
     
 }
 // Allow references to generated code
