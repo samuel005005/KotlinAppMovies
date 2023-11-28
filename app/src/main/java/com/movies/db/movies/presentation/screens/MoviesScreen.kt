@@ -5,22 +5,23 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import coil.size.Scale
 import com.movies.db.R
-import com.movies.db.movies.presentation.parcebles.entities.MovieParcelize
+import com.movies.db.movies.presentation.MoviesViewModel
 
 @Composable
 fun MoviesScreen(
     navHostController: NavHostController,
-    movie: MovieParcelize
+    viewModel: MoviesViewModel = hiltViewModel()
 ) {
     AsyncImage(
         contentScale = ContentScale.Crop,
         model = ImageRequest.Builder(LocalContext.current)
-            .data(movie.posterPath).scale(Scale.FIT).build(),
+            .data(viewModel.movieParcelize?.posterPath).scale(Scale.FIT).build(),
         contentDescription = null,
         modifier = Modifier
             .height(500.dp),

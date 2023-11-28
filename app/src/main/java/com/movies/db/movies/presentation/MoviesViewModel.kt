@@ -1,14 +1,17 @@
 package com.movies.db.movies.presentation
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.movies.db.app.core.Resource
 import com.movies.db.app.core.util.DefaultPaginator
+import com.movies.db.app.core.util.NavArgs
 import com.movies.db.movies.application.usecases.GetNowPlayingUseCase
 import com.movies.db.movies.application.usecases.GetPopularUseCase
 import com.movies.db.movies.application.usecases.GetTopRated
 import com.movies.db.movies.application.usecases.GetUpcoming
 import com.movies.db.movies.domain.entities.Movie
+import com.movies.db.movies.presentation.parcebles.entities.MovieParcelize
 import com.movies.db.movies.presentation.parcebles.mappers.MovieToParcebleMapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,10 +25,17 @@ class MoviesViewModel @Inject constructor(
     private val getNowPlayingUseCase: GetNowPlayingUseCase,
     private val getPopularUseCase: GetPopularUseCase,
     private val getTopRated: GetTopRated,
-    private val getUpcoming: GetUpcoming
+    private val getUpcoming: GetUpcoming,
+    savedStateHandle: SavedStateHandle
 ) :
     ViewModel() {
+
     private val movieToParcebleMapper = MovieToParcebleMapper();
+
+    val movieParcelize = savedStateHandle.get<MovieParcelize>(
+        NavArgs.Item.key
+    )
+
     private val _nowPlayingMovies = MutableStateFlow(MoviesState())
     val nowPlayingMovies: StateFlow<MoviesState> = _nowPlayingMovies.asStateFlow()
     private val _popularMovies = MutableStateFlow(MoviesState())

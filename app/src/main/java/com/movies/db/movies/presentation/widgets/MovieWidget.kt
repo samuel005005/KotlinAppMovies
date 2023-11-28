@@ -39,7 +39,6 @@ fun MovieWidget(movie: MovieParcelize, modifier: Modifier) {
                 .padding(horizontal = 8.dp)
         ) {
             AsyncImage(
-
                 contentScale = ContentScale.Crop,
                 model = ImageRequest.Builder(LocalContext.current).data(movie.posterPath)
                     .crossfade(true).scale(Scale.FILL).build(),

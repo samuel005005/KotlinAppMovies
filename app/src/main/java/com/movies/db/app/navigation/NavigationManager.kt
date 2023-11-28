@@ -27,10 +27,8 @@ fun NavGraphApp(navController: NavHostController) {
                 type = NavType.parcelableTypeOf<MovieParcelize>()
             })
         ) {
-            val movie = it.arguments?.getParcelable("Movie", MovieParcelize::class.java)
             MoviesScreen(
-                navHostController = navController,
-                movie = movie!!
+                navHostController = navController
             )
         }
     }
