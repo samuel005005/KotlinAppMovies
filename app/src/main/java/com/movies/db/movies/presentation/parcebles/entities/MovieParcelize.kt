@@ -1,5 +1,9 @@
-package com.movies.db.movies.domain.entities
-data class Movie(
+package com.movies.db.movies.presentation.parcebles.entities
+
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+@Parcelize
+data class MovieParcelize(
     val adult: Boolean,
     val backdropPath: String,
     val genreIds: List<Long>,
@@ -14,4 +18,4 @@ data class Movie(
     val video: Boolean,
     val voteAverage: Double,
     val voteCount: Long
-)
+) : Parcelable

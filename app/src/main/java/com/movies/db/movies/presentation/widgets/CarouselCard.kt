@@ -38,13 +38,14 @@ import com.google.accompanist.pager.calculateCurrentOffsetForPage
 import com.google.accompanist.pager.rememberPagerState
 import com.movies.db.R
 import com.movies.db.movies.domain.entities.Movie
+import com.movies.db.movies.presentation.parcebles.entities.MovieParcelize
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.math.absoluteValue
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun CarouselCard(movies: List<Movie>) {
+fun CarouselCard(movies: List<MovieParcelize>) {
 
     val pagerState = rememberPagerState(initialPage = 2)
     val scope = rememberCoroutineScope()

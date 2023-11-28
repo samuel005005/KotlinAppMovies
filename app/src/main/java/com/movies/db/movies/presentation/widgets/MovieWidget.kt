@@ -26,9 +26,10 @@ import coil.request.ImageRequest
 import coil.size.Scale
 import com.movies.db.R
 import com.movies.db.movies.domain.entities.Movie
+import com.movies.db.movies.presentation.parcebles.entities.MovieParcelize
 
 @Composable
-fun MovieWidget(movie: Movie, modifier: Modifier) {
+fun MovieWidget(movie: MovieParcelize, modifier: Modifier) {
     val yellowShade800 = Color(0xFFFFC107)
 
     Column(modifier = modifier) {
