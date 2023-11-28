@@ -42,9 +42,9 @@ fun NavHostApplication() {
             composable(Routes.MovieDetails.screenRoute, arguments = listOf(navArgument("movieId") {
                 type = NavType.LongType
             })) { backStackEntry ->
-                MoviesScreen(
-                    navHostController = navController
-                )
+//                MoviesScreen(
+//                    navHostController = navController
+//                )
             }
         }
     }
