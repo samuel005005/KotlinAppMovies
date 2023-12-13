@@ -2,7 +2,7 @@ package com.movies.db.movies.application
 
 import com.movies.db.movies.application.usecases.GetNowPlayingUseCase
 import com.movies.db.movies.application.usecases.GetPopularUseCase
-import com.movies.db.movies.domain.repository.MoviesDbRepository
+import com.movies.db.movies.domain.repository.IMoviesDbRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,7 +15,7 @@ object UseCaseModule {
     @Provides
     @Singleton
     fun provideGetNowPlayingUseCase(
-        moviesDbRepository: MoviesDbRepository,
+        moviesDbRepository: IMoviesDbRepository,
     ): GetNowPlayingUseCase {
         return GetNowPlayingUseCase(
             moviesDbRepository
@@ -24,7 +24,7 @@ object UseCaseModule {
     @Provides
     @Singleton
     fun provideGetPopularUseCase(
-        moviesDbRepository: MoviesDbRepository,
+        moviesDbRepository: IMoviesDbRepository,
     ): GetPopularUseCase {
         return GetPopularUseCase(
             moviesDbRepository

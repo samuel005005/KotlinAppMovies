@@ -1,7 +1,7 @@
 package com.movies.db.movies.infrastructure.di
 
-import com.movies.db.movies.domain.datasources.MovieRemoteDataSource
-import com.movies.db.movies.domain.datasources.MoviesCacheDataSource
+import com.movies.db.movies.domain.datasources.IMovieRemoteDataSource
+import com.movies.db.movies.domain.datasources.IMoviesCacheDataSource
 import com.movies.db.movies.infrastructure.datasources.MoviesDataSourceFactory
 import dagger.Module
 import dagger.Provides
@@ -15,8 +15,8 @@ object ProviderModule {
     @Provides
     @Singleton
     fun provideMoviesDataSourceFactory(
-        moviesRemoteDataSource: MovieRemoteDataSource,
-        moviesCacheDataSource: MoviesCacheDataSource
+        moviesRemoteDataSource: IMovieRemoteDataSource,
+        moviesCacheDataSource: IMoviesCacheDataSource
     ): MoviesDataSourceFactory {
         return MoviesDataSourceFactory(
             moviesRemoteDataSource,

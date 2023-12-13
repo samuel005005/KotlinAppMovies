@@ -1,21 +1,18 @@
 package com.movies.db.movies.infrastructure.datasources
 
-import com.movies.db.movies.domain.datasources.MovieRemoteDataSource
-import com.movies.db.movies.domain.datasources.MoviesCacheDataSource
-import com.movies.db.movies.domain.datasources.MoviesDataSource
-import com.movies.db.movies.infrastructure.data.cache.MovieEntity
-import io.realm.RealmResults
+import com.movies.db.movies.domain.datasources.IMovieRemoteDataSource
+import com.movies.db.movies.domain.datasources.IMoviesCacheDataSource
 import javax.inject.Inject
 
 class MoviesDataSourceFactory @Inject constructor(
-    private val moviesRemoteData: MovieRemoteDataSource,
-    private val moviesCacheData: MoviesCacheDataSource,
+    private val moviesRemoteData: IMovieRemoteDataSource,
+    private val moviesCacheData: IMoviesCacheDataSource,
 ) {
-    fun getRemoteData(): MovieRemoteDataSource {
+    fun getRemoteData(): IMovieRemoteDataSource {
         return moviesRemoteData
     }
 
-    fun getCacheData(): MoviesCacheDataSource {
+    fun getCacheData(): IMoviesCacheDataSource {
         return moviesCacheData
     }
 
